@@ -1,0 +1,21 @@
+div.field div {
+  padding: 2px;
+  margin: 2px;
+}
+
+div.field div label {
+  width:100px; text-align:right; padding-right: 5px; vertical-align: top;
+}
+
+textarea {
+  width: 800px;
+  height: 300px;
+}
+
+label {
+  float:left;
+}
+
+.field_with_errors {
+  float:left;
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blog</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <!-- <%= javascript_include_tag 'transition', 'data-turbolinks-track' => true %> -->
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'bootstrap.min', media: 'all', 'data-turbolinks-track' => true %>
+</head>
+<body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item <% if @active == :home %>active<% end %>" href="<%= root_path %>">Home</a>
+          <% @categories.each do |category| %>
+          <a class="blog-nav-item <% if @active == category.slug %>active<% end %>" href="<%= slug_category_path(category.slug) %>"><%= category.name %></a>
+          <% end %>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">First Blog</h1>
+        <p class="lead blog-description">Hello World!</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <%= yield %>
+
+          <!--
+          <nav>
+            <ul class="pager">
+              <li><a href="#">Previous</a></li>
+              <li><a href="#">Next</a></li>
+            </ul>
+          </nav>
+          -->
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Autores</h4>
+            <ol class="list-unstyled">
+              <% @users.each do |user| %>
+              <li><a href="<%= slug_writer_path(user.slug) %>"><%= user.name %></a></li>
+              <% end %>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Categorias</h4>
+            <ol class="list-unstyled">
+              <% @categories.each do |category| %>
+              <li><a href="<%= slug_category_path(category.slug) %>"><%= category.name %></a></li>
+              <% end %>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <footer class="blog-footer">
+      <p>Blog template built for <a href="http://getbootstrap.com">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+<%= javascript_include_tag 'bootstrap.min', 'data-turbolinks-track' => true %>
+
+</body>
+</html>

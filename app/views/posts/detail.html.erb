@@ -1,0 +1,10 @@
+<% if @post %>
+<div class="blog-post">
+  <h2 class="blog-post-title"><%= @post.title %></h2>
+  <p class="blog-post-meta"><%= @post.datetime.strftime("Dia %d de %B de %Y") %> por <a href="#"><%= @post.admin.name %></a></p>
+
+  <%= @post.content %>
+</div><!-- /.blog-post -->
+<% else %>
+<p>Post não encontrado.<p>
+<% end %>

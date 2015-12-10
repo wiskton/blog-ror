@@ -1,0 +1,75 @@
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Posts
+        </h1>
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> <a href="<%= admin_posts_path %>">Posts</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        <% if can? :create, Post %><a href="<%= new_admin_post_path() %>" class="btn btn-success">Adicionar</a><% end %>
+    </div>
+</div>
+<!-- /.row -->
+
+<div class="row">
+  &nbsp;
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Posts</h3>
+          </div>
+          <div class="panel-body">
+              <div class="table-responsive">
+
+                  <% if @posts.count > 0 %>
+                  <table class="table table-bordered table-hover table-striped">
+                      <thead>
+                          <tr>
+                              <th>ID #</th>
+                              <th>Nome</th>
+                              <th>Moderador</th>
+                              <th>Categoria</th>
+                              <th>Data</th>
+                              <% if can? :update, Post %><td>Editar</td><% end %>
+                              <% if can? :destroy, Post %><td>Deletar</td><% end %>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <% @posts.each do |post| %>
+                          <tr>
+                              <td><%= post.id %></td>
+                              <td><%= link_to post.title, admin_post_path(post.id) %></td>
+                              <td><% if post.admin %><%= post.admin.name %><% end %></td>
+                              <td><% if post.category %><%= post.category.name %><% end %></td>
+                              <td><%= post.datetime.strftime("%d/%m/%Y") %></td>
+                              <% if can? :update, Post %><td><%= link_to 'Editar', edit_admin_post_path(post.id) %></td><% end %>
+                              <% if can? :destroy, Post %><td><%= link_to 'Deletar', admin_post_path(post.id), method: :delete, data: { confirm: "Tem certeza que deseja excluir?" } %></td><% end %>
+                          </tr>
+                          <% end %>
+                      </tbody>
+                  </table>
+                  <% else %>
+                    <p>Nenhum post no momento.</p>
+                  <% end %>
+              </div>
+              <div class="text-right">
+                  <%= paginate @posts %>
+                  <!-- <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a> -->
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- /.row -->

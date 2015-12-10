@@ -1,0 +1,43 @@
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Posts
+        </h1>
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> <a href="<%= admin_posts_path %>">Posts</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+
+
+<div class="row">
+  &nbsp;
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Posts</h3>
+          </div>
+          <div class="panel-body">
+              <div class="table-responsive">
+
+                <p><label>Autor: </label> <% if @post.admin %><%= @post.admin.name %><% end %></p>
+                <p><label>Categoria: </label> <%= @post.category.name %></p>
+                <p><label>Nome: </label> <%= @post.title %></p>
+                <p><label>Conteúdo: </label> <%= @post.content %></p>
+                <p><label>Date: </label> <%= @post.datetime.strftime("%d/%m/%Y") %></p>
+                <% if can? :update, Post %><p><%= link_to 'Editar', edit_admin_post_path(@post.id) %></p><% end %>
+                <% if can? :destroy, Post %><p><%= link_to 'Deletar', admin_post_path(@post.id), method: :delete, data: { confirm: "Tem certeza que deseja excluir?" } %></p><% end %>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- /.row -->

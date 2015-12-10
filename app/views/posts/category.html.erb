@@ -1,0 +1,14 @@
+          <% if @posts.count > 0 %>
+          <div class="blog-post">
+            <% @posts.each do |post| %>
+            <h2 class="blog-post-title"><a href="<%= slug_post_path(post.slug) %>"><%= post.title %></a></h2>
+            <p class="blog-post-meta"><%= post.datetime.strftime("Dia %d de %B de %Y") %> por <a href="#"><%= post.admin.name %></a></p>
+
+            <%= post.content %>
+            <% end %>
+          </div><!-- /.blog-post -->
+          <% else %>
+          <p>Nenhum post para esta categoria.<p>
+          <% end %>
+
+          <%= paginate @posts %>
